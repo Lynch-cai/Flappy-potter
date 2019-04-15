@@ -13,32 +13,12 @@ let character05 = new Image()
 character05.src = "images/character05.png"
 let enemy01 = new Image()
 enemy01.src = "images/enemy01.png"
-let choice, timeout, temp2, gravitySpeed, gravityVelocity=0
-
-
-
-
-init()
-
-class Character{
-  constructor(skin){
-    this.posy = 335
-    this.posx = 100
-    this.skin = skin
-  }
-  jump(){
-    this.posy -= 100
-  }
-
-}
-
-let character = new Character(choice)
+let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity
 
 function drawCharacter(){
-  ctx.drawImage(character.skin, character.posx, character.posy, 50, 50)
+  ctx.drawImage(character.skin, character.posx, character.posy, 75, 75)
   requestAnimationFrame(drawCharacter)
 }
-
 
 cvs.addEventListener( // Jump on click
   'click',
@@ -47,7 +27,7 @@ cvs.addEventListener( // Jump on click
     gravitySpeed = 0
     gravityVelocity = 0
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    jump0 = setInterval(jump,6)
+    jump0 = setInterval(jump,7)
     clearInterval(gravity)
   }
 )
@@ -63,19 +43,46 @@ function jump(){
   }
 }
 
-
 function gravity(){ // Gravity & Velocity
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  gravitySpeed = Math.floor(gravityVelocity+=0.20)
-  character.posy += gravitySpeed
-  console.log(gravitySpeed)
-  if (gravityVelocity>5){
-    gravityVelocity=5
+  if (gravitySpeed>-1) {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    gravitySpeed = Math.floor(gravityVelocity+=0.25)
+    character.posy += gravitySpeed
+    if (gravityVelocity>12){
+      gravityVelocity=12
+    }
   }
 }
+
+
+
+
+
+naturalGravity = setInterval(gravity,18)
+
+
+//// Character
+
 function init(){
   choice = character01
+  gravitySpeed=-1
 }
 
+init()
+
+class Character{
+  constructor(skin){
+    this.posy = 322
+    this.posx = 100
+    this.skin = skin
+  }
+  jump(){
+    this.posy -= 100
+  }
+
+}
+
+let character = new Character(choice)
+
 drawCharacter()
-naturalGravity = setInterval(gravity,18)
+////
