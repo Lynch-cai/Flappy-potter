@@ -14,7 +14,16 @@ let enemyImg01 = new Image()
 enemyImg01.src = "images/enemyImg01.png"
 let ballImg = new Image()
 ballImg.src = "images/ballImg.png"
-let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity, scoreDistance, scoreBall
+let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity, scoreMax
+let score = 0
+let temp3 =0, enemy = new Array(), numberOfEnemies = 6
+let temp4=0, ball = new Array(), numberOfBalls = 6, ballSpeed=90
+let gameOver=0
+let totalCoins = parseInt(localStorage.getItem('localTotalCoins'))
+if (isNaN(totalCoins)){
+  totalCoins=0
+}
+
 
 function drawCharacter(){
   ctx.drawImage(character.skin, character.posx, character.posy, character.width, character.height)
@@ -24,11 +33,13 @@ function drawCharacter(){
 cvs.addEventListener( // Jump on click
   'click',
   function(){
-    timeout = 0
-    gravitySpeed = 0
-    gravityVelocity = 0
-    jump0 = setInterval(jump,12)
-    clearInterval(gravity)
+    if (gameOver==0){
+      timeout = 0
+      gravitySpeed = 0
+      gravityVelocity = 0
+      jump0 = setInterval(jump,12)
+      clearInterval(gravity)
+    }
   }
 )
 
@@ -57,30 +68,32 @@ naturalGravity = setInterval(gravity,20)
 
 function init(){
   choice = characterImg01
+  let gameOver=0
   gravitySpeed=-1
 }
 
 init()
 
 class Element{
-  constructor(skin,posX,posY,width,height){
+  constructor(skin,posX,posY,width,height,start){
     this.posx = posX
     this.posy = posY
     this.skin = skin
     this.width = width
     this.height = height
+    this.start = start
   }
 }
 
-let character = new Element(choice,100,322,75,75)
+let character = new Element(choice,100,322,75,75,true)
 
 drawCharacter()
 ////
 
 //// Enemy
-let temp3 = 0, enemy = new Array(), numberOfEnemies = 6
+
 for (var i = 0; i < numberOfEnemies; i++) { //
-  enemy.push(new Element(enemyImg01,9999,0,75,75))
+  enemy.push(new Element(enemyImg01,9999,0,75,75,true))
 }
 
 function generatePosY(y){
@@ -117,10 +130,12 @@ moveEnemyLeft = setInterval ( // Enemy go to the left side
 
 spawnEnemy = setInterval( // Change enemy position
   function(){
-    enemy[temp3].posx=1280
-    temp3+=1
-    if (temp3==numberOfEnemies){
-      clearInterval(spawnEnemy)
+    if (gravitySpeed>-1){ // If the gravity is active, that mean the game started
+      enemy[temp3].posx=1280
+      temp3+=1
+      if (temp3==numberOfEnemies){
+        clearInterval(spawnEnemy)
+      }
     }
   }, 1750
 )
@@ -129,9 +144,8 @@ drawAllEnemy()
 
 // Ball
 
-ball = new Array(), numberOfballs = 6
-for (var i = 0; i < numberOfballs; i++) { //
-  ball.push(new Element(ballImg,9999,0,68,28))
+for (var i = 0; i < numberOfBalls; i++) { //
+  ball.push(new Element(ballImg,10001,0,102,42,true))
 }
 
 function generateBallPosY(y){
@@ -139,24 +153,24 @@ function generateBallPosY(y){
 }
 
 function generateBallPosYInit(){
-  for (let i = 0; i < numberOfballs; i++) {
+  for (let i = 0; i < numberOfBalls; i++) {
     ball[i].posy = Math.floor(Math.random()*645)
   }
 }
 
-function drawAllball(){
-  for (let i = 0; i < numberOfballs; i++) {
+function drawAllBall(){
+  for (let i = 0; i < numberOfBalls; i++) {
     ctx.drawImage(ball[i].skin, ball[i].posx, ball[i].posy, ball[i].width, ball[i].height)
   }
-  requestAnimationFrame(drawAllball)
+  requestAnimationFrame(drawAllBall)
 }
 
-moveballLeft = setInterval ( // ball go to the left side
+moveBallLeft = setInterval ( // ball go to the left side
   function(){
-    for (var i = 0; i < numberOfballs; i++) {
-      if (ball[i].posx<=1280){
-        ctx.clearRect(0,0,canvas.width,canvas.height);
-        ball[i].posx-=4 // ball Speed, default=7
+    for (var i = 0; i < numberOfBalls; i++) {
+      if (ball[i].posx<=10000){
+        ctx.clearRect(0,0,canvas.width,canvas.height)
+        ball[i].posx-=ballSpeed // ball Speed, default=7
       }
       if (ball[i].posx<=-75){
         ball[i].posx=1280
@@ -166,21 +180,23 @@ moveballLeft = setInterval ( // ball go to the left side
   }, 50
 )
 
-spawnball = setInterval( // Change ball position
+spawnBall = setInterval( // Change ball position
   function(){
-    ball[temp3].posx=1280
-    temp3+=1
-    if (temp3==numberOfballs){
-      clearInterval(spawnball)
+    if (gravitySpeed>-1){ // If the gravity is active, that mean the game started
+      ball[temp4].posx=1280
+      temp4+=1
+      if (temp4==numberOfBalls){
+        clearInterval(spawnBall)
+        temp4=0
+      }
     }
-  }, 5000
+  }, 500
 )
 generateBallPosYInit()
-drawAllball()
-
+drawAllBall()
 
 // Hurtbox X & Y
-checkGameover = setInterval(hurtbox, 5)
+checkCollision = setInterval(hurtbox, 5)
 function hurtbox() {
   for (var i = 0; i < numberOfEnemies; i++) {
     if ((character.posx < enemy[i].posx + enemy[i].width &&
@@ -189,10 +205,45 @@ function hurtbox() {
        character.height + character.posy > enemy[i].posy) ||
        character.posy <=-1 || character.posy >=721)
     {
-      function gameOver(){
-      
-      }
+      gameOverFct()
     }
   }
+  for (var i = 0; i < numberOfBalls; i++) {
+    if (character.posx < ball[i].posx + ball[i].width &&
+       character.posx + character.width > ball[i].posx &&
+       character.posy < ball[i].posy + ball[i].height &&
+       character.height + character.posy > ball[i].posy)
+    {
+      ball[i].posx = 2000
+      saveTotalCoins()
+      console.log(score)
+    }
+  }
+}
 
+function gameOverFct(){
+
+  gravitySpeed=-1
+  gameOver=1
+  for (var i = 0; i < enemy.length; i++) {
+    enemy[i].posy = 10000
+  }
+  for (var i = 0; i < ball.length; i++) {
+    ball[i].posy=10000
+  }
+  saveScoreMax()
+
+}
+
+function saveScoreMax(){
+  scoreMax = localStorage.getItem('localScoreMax')
+  if (scoreMax<score) {
+    scoreMax=score
+    localStorage.setItem('localScoreMax', scoreMax)
+  }
+}
+
+function saveTotalCoins(){
+  totalCoins+=+1
+  localStorage.setItem('localTotalCoins', totalCoins)
 }
