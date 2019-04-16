@@ -1,3 +1,8 @@
+let numberOfBalls = 6 // default 6
+let ballSpeed = 90 // default 5
+let numberOfEnemies = 6 // default 4
+let enemySpeed = 7 // default 7
+
 let cvs = document.querySelector('canvas')
 let ctx = cvs.getContext('2d')
 let characterImg01 = new Image()
@@ -16,8 +21,8 @@ let ballImg = new Image()
 ballImg.src = "images/ballImg.png"
 let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity, scoreMax
 let score = 0
-let temp3 =0, enemy = new Array(), numberOfEnemies = 6
-let temp4=0, ball = new Array(), numberOfBalls = 6, ballSpeed=90
+let temp3 =0, enemy = new Array()
+let temp4=0, ball = new Array()
 let gameOver=0
 let totalCoins = parseInt(localStorage.getItem('localTotalCoins'))
 if (isNaN(totalCoins)){
@@ -85,7 +90,7 @@ class Element{
   }
 }
 
-let character = new Element(choice,100,322,75,75,true)
+let character = new Element(choice,250,322,75,75,true)
 
 drawCharacter()
 ////
@@ -118,9 +123,9 @@ moveEnemyLeft = setInterval ( // Enemy go to the left side
     for (var i = 0; i < numberOfEnemies; i++) {
       if (enemy[i].posx<=1280){
         ctx.clearRect(0,0,canvas.width,canvas.height);
-        enemy[i].posx-=7 // Enemy Speed, default=7
+        enemy[i].posx-= enemySpeed
       }
-      if (enemy[i].posx<=-75){
+      if (enemy[i].posx<=-75 && enemy[i].posx>=-500){
         enemy[i].posx=1280
         generatePosY(i)
       }
@@ -172,7 +177,7 @@ moveBallLeft = setInterval ( // ball go to the left side
         ctx.clearRect(0,0,canvas.width,canvas.height)
         ball[i].posx-=ballSpeed // ball Speed, default=7
       }
-      if (ball[i].posx<=-75){
+      if (ball[i].posx<=-75 && ball[i].posx>=-500){
         ball[i].posx=1280
         generateBallPosY(i)
       }
@@ -182,7 +187,7 @@ moveBallLeft = setInterval ( // ball go to the left side
 
 spawnBall = setInterval( // Change ball position
   function(){
-    if (gravitySpeed>-1){ // If the gravity is active, that mean the game started
+    if (gameOver==0 && gravitySpeed>-1){ // If the gravity is active, that mean the game started
       ball[temp4].posx=1280
       temp4+=1
       if (temp4==numberOfBalls){
@@ -203,7 +208,7 @@ function hurtbox() {
        character.posx + character.width > enemy[i].posx &&
        character.posy < enemy[i].posy + enemy[i].height &&
        character.height + character.posy > enemy[i].posy) ||
-       character.posy <=-1 || character.posy >=721)
+       character.posy <=-75 || character.posy >=795)
     {
       gameOverFct()
     }
@@ -226,13 +231,13 @@ function gameOverFct(){
   gravitySpeed=-1
   gameOver=1
   for (var i = 0; i < enemy.length; i++) {
-    enemy[i].posy = 10000
+    enemy[i].posx =-501
   }
   for (var i = 0; i < ball.length; i++) {
-    ball[i].posy=10000
+    ball[i].posx=-501
   }
   saveScoreMax()
-
+  return gameOverFct
 }
 
 function saveScoreMax(){
