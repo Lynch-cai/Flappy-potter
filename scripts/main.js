@@ -14,10 +14,12 @@ let enemyImg01 = new Image()
 enemyImg01.src = "images/enemyImg01.png"
 let ballImg = new Image()
 ballImg.src = "images/ballImg.png"
+let gameOverImg = new Image()
+gameOverImg.src = "images/gameOverImg.png"
 let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity, scoreMax
 let score = 0
 let temp3 =0, enemy = new Array(), numberOfEnemies = 6
-let temp4=0, ball = new Array(), numberOfBalls = 6, ballSpeed=90
+let temp4=0, ball = new Array(), numberOfBalls = 6, ballSpeed=50
 let gameOver=0
 let totalCoins = parseInt(localStorage.getItem('localTotalCoins'))
 if (isNaN(totalCoins)){
@@ -70,6 +72,11 @@ function init(){
   choice = characterImg01
   let gameOver=0
   gravitySpeed=-1
+  ctx.beginPath()
+  ctx.fillStyle="black"
+  ctx.font = "60px Arial"
+  ctx.fillText(score, 1200, 70)
+  ctx.closePath()
 }
 
 init()
@@ -222,6 +229,9 @@ function hurtbox() {
 }
 
 function gameOverFct(){
+  ctx.beginPath()
+  ctx.fillText(gameOverImg, 500, 360)
+  ctx.closePath()
 
   gravitySpeed=-1
   gameOver=1
@@ -235,6 +245,10 @@ function gameOverFct(){
 
 }
 
+
+//drawImage
+
+// Local Storage
 function saveScoreMax(){
   scoreMax = localStorage.getItem('localScoreMax')
   if (scoreMax<score) {
