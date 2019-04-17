@@ -24,11 +24,16 @@ document.addEventListener( // Jump on click
   'keydown',
   function(){
     if (isGameOver==0&&timeout==0){
+      checkLevel()
       gravitySpeed = 0
       gravityVelocity = 0
       jump0 = setInterval(jump,jumpTime)
       clearInterval(gravity)
-      cancelAnimationFrame(startGameRequest)
+      setTimeout(
+        function(){
+          cancelAnimationFrame(startGameRequest)
+        }, 110
+      )
     }
   }
 )
@@ -44,19 +49,6 @@ function jump(){
     timeout += 1
   }
 }
-
-cvs.addEventListener(
-  'click',
-  function(){
-    let canvas = document.getElementById('canvas')
-    if(canvas.webkitRequestFullScreen){
-       canvas.webkitRequestFullScreen();
-    }
-    else {
-      canvas.mozRequestFullScreen();
-    }
-  }
-)
 
 function gravity(){ // Gravity & Velocity
   if (gravitySpeed>-1) {
