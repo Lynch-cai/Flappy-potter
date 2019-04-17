@@ -48,6 +48,12 @@ function gameOver(){
   for (var i = 0; i < ball.length; i++) {
     ball[i].posy=10001
   }
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    gravitySpeed = Math.floor(gravityVelocity+=0.40) // Power of the gravity
+    character.posy += gravitySpeed
+    if (gravityVelocity>20){
+      gravityVelocity=20
+    }
   saveScoreMax()
   drawGameOver()
 }
