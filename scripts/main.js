@@ -14,8 +14,6 @@ let enemyImg01 = new Image()
 enemyImg01.src = "images/enemyImg01.png"
 let ballImg = new Image()
 ballImg.src = "images/ballImg.png"
-let gameOverImg = new Image()
-gameOverImg.src = "images/gameOverImg.png"
 let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity, scoreMax
 let score = 0
 let temp3 =0, enemy = new Array(), numberOfEnemies = 6
@@ -229,10 +227,6 @@ function hurtbox() {
 }
 
 function gameOverFct(){
-  ctx.beginPath()
-  ctx.fillText(gameOverImg, 500, 360)
-  ctx.closePath()
-
   gravitySpeed=-1
   gameOver=1
   for (var i = 0; i < enemy.length; i++) {
