@@ -15,12 +15,6 @@ function drawMoney(){
 }
 drawMoney()
 
-
-
-function checkMouseCollision(){
-
-}
-
 let mousePosX, mousePosY
 
 function printMousePos(event) {

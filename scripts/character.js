@@ -10,9 +10,7 @@ let characterImg04 = new Image()
 characterImg04.src = "images/characterImg04.png"
 let characterImg05 = new Image()
 characterImg05.src = "images/characterImg05.png"
-let choice, timeout, temp2, gravitySpeed=-1, gravityVelocity
-
-let gameOver=0
+let choice = characterImg01, timeout, temp2, gravitySpeed, gravityVelocity, isGameOver
 
 function drawCharacter(){
   ctx.drawImage(character.skin, character.posx, character.posy, character.width, character.height)
@@ -22,22 +20,25 @@ function drawCharacter(){
 cvs.addEventListener( // Jump on click
   'click',
   function(){
-    if (gameOver==0){
-      timeout = 0
+    if (isGameOver==0&&timeout==0){
       gravitySpeed = 0
       gravityVelocity = 0
-      jump0 = setInterval(jump,12)
+      jump0 = setInterval(jump,jumpTime)
       clearInterval(gravity)
+      cancelAnimationFrame(startGameRequest)
     }
   }
 )
 
 function jump(){
-  ctx.clearRect(0,0,canvas.width,canvas.height);
-  character.posy -=18
-  timeout += 1
-  if (timeout>=7){
-    clearInterval(jump0);
+  if (timeout>=jumpLevitation){
+    timeout = 0
+    clearInterval(jump0)
+  }
+  else {
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    character.posy -=jumpPower
+    timeout += 1
   }
 }
 
@@ -53,10 +54,21 @@ function gravity(){ // Gravity & Velocity
 }
 naturalGravity = setInterval(gravity,20)
 
+function startGame(){ // show gameOver
+  ctx.font = '50px Helvetica';
+  ctx.fillText('Click to start !', 500, 350)
+  startGameRequest = requestAnimationFrame(startGame)
+}
+
 function init(){
-  choice = characterImg01
-  let gameOver=0
+  isGameOver=0
+  timeout=0
   gravitySpeed=-1
+  score=0
+  temp3=0
+  temp4=0
+  temp5=0
+  startGame()
 }
 
 init()

@@ -25,22 +25,27 @@ function drawAllBall(){
 
 moveBallLeft = setInterval ( // ball go to the left side
   function(){
-    for (var i = 0; i < numberOfBalls; i++) {
-      if (ball[i].posx<=10000){
-        ctx.clearRect(0,0,canvas.width,canvas.height)
-        ball[i].posx-=ballSpeed // ball Speed, default=7
-      }
-      if (ball[i].posx<=-75 && ball[i].posx>=-500){
-        ball[i].posx=1280
-        generateBallPosY(i)
+    if (isGameOver==0 && gravitySpeed>-1){
+      for (var i = 0; i < numberOfBalls; i++) {
+        if (ball[i].posx<=10000){
+          ctx.clearRect(0,0,canvas.width,canvas.height)
+          ball[i].posx-=ballSpeed // ball Speed, default=7
+        }
+        if (ball[i].posx<=-75 && ball[i].posx>=-500){
+          ball[i].posx=1280
+          generateBallPosY(i)
+        }
       }
     }
-  }, 50
+  }, ballMoveEvery
 )
+
+
+
 
 spawnBall = setInterval( // Change ball position
   function(){
-    if (gameOver==0 && gravitySpeed>-1){ // If the gravity is active, that mean the game started
+    if (isGameOver==0 && gravitySpeed>-1){ // If the gravity is active, that mean the game started
       ball[temp4].posx=1280
       temp4+=1
       if (temp4==numberOfBalls){
@@ -48,7 +53,7 @@ spawnBall = setInterval( // Change ball position
         temp4=0
       }
     }
-  }, 500
+  }, spawnBallInterval
 )
 generateBallPosYInit()
 drawAllBall()
