@@ -17,8 +17,8 @@ function drawCharacter(){
   requestAnimationFrame(drawCharacter)
 }
 
-cvs.addEventListener( // Jump on click
-  'click',
+document.addEventListener( // Jump on click
+  'keypress',
   function(){
     if (isGameOver==0&&timeout==0){
       gravitySpeed = 0
