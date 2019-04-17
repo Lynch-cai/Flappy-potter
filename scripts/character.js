@@ -45,6 +45,19 @@ function jump(){
   }
 }
 
+cvs.addEventListener(
+  'click',
+  function(){
+    let canvas = document.getElementById('canvas')
+    if(canvas.webkitRequestFullScreen){
+       canvas.webkitRequestFullScreen();
+    }
+    else {
+      canvas.mozRequestFullScreen();
+    }
+  }
+)
+
 function gravity(){ // Gravity & Velocity
   if (gravitySpeed>-1) {
     ctx.clearRect(0,0,canvas.width,canvas.height);
