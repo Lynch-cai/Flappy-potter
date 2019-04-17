@@ -1,5 +1,6 @@
 let cvs = document.querySelector('canvas')
 let ctx = cvs.getContext('2d')
+
 let characterImg01 = new Image()
 characterImg01.src = "images/characterImg01.png"
 let characterImg02 = new Image()
@@ -10,7 +11,9 @@ let characterImg04 = new Image()
 characterImg04.src = "images/characterImg04.png"
 let characterImg05 = new Image()
 characterImg05.src = "images/characterImg05.png"
-let choice = characterImg01, timeout, temp2, gravitySpeed, gravityVelocity, isGameOver
+let choice = characterImg01, timeout, temp1=1, temp2, gravitySpeed, gravityVelocity, isGameOver
+
+
 
 function drawCharacter(){
   ctx.drawImage(character.skin, character.posx, character.posy, character.width, character.height)
@@ -18,14 +21,19 @@ function drawCharacter(){
 }
 
 document.addEventListener( // Jump on click
-  'keypress',
+  'keydown',
   function(){
     if (isGameOver==0&&timeout==0){
+      checkLevel()
       gravitySpeed = 0
       gravityVelocity = 0
       jump0 = setInterval(jump,jumpTime)
       clearInterval(gravity)
-      cancelAnimationFrame(startGameRequest)
+      setTimeout(
+        function(){
+          cancelAnimationFrame(startGameRequest)
+        }, 110
+      )
     }
   }
 )
@@ -42,23 +50,10 @@ function jump(){
   }
 }
 
-cvs.addEventListener(
-  'click',
-  function(){
-    let canvas = document.getElementById('canvas')
-    if(canvas.webkitRequestFullScreen){
-       canvas.webkitRequestFullScreen();
-    }
-    else {
-      canvas.mozRequestFullScreen();
-    }
-  }
-)
-
 function gravity(){ // Gravity & Velocity
   if (gravitySpeed>-1) {
     ctx.clearRect(0,0,canvas.width,canvas.height);
-    gravitySpeed = Math.floor(gravityVelocity+=0.40) // Power of the gravity
+    gravitySpeed = Math.floor(gravityVelocity+=gravityPower) // Power of the gravity
     character.posy += gravitySpeed
     if (gravityVelocity>20){
       gravityVelocity=20
@@ -67,11 +62,13 @@ function gravity(){ // Gravity & Velocity
 }
 naturalGravity = setInterval(gravity,20)
 
-function startGame(){ // show gameOver
-  ctx.font = '50px Helvetica';
-  ctx.fillText('Click to start !', 500, 350)
-  startGameRequest = requestAnimationFrame(startGame)
+function debugText(){ // This function force the load of the font
+  ctx.font = '0px invasion';
+  ctx.fillText('.', -50, -50)
+  requestAnimationFrame(debugText)
 }
+
+debugText()
 
 function init(){
   isGameOver=0
@@ -81,7 +78,6 @@ function init(){
   temp3=0
   temp4=0
   temp5=0
-  startGame()
 }
 
 init()

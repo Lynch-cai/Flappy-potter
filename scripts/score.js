@@ -15,6 +15,7 @@ function saveScoreMax(){
 
 function saveTotalCoins(){
   score+=1
+  checkLevel()
   if (totalCoins<999){ // Limit of budget
     totalCoins+=+1
   }
@@ -29,7 +30,7 @@ function drawTotalCoins(){
   requestAnimationFrame(drawTotalCoins)
 }
 
-drawTotalCoins()
+
 
 
 
@@ -39,8 +40,6 @@ function drawScore(){
   requestAnimationFrame(drawScore)
 }
 
-drawScore()
-
 function drawScoreMax(){
   saveScoreMax()
   ctx.font = '22px invasion';
@@ -48,4 +47,42 @@ function drawScoreMax(){
   requestAnimationFrame(drawScoreMax)
 }
 
-drawScoreMax()
+
+setTimeout(
+  function(){
+    drawTotalCoins()
+    startGame()
+    drawScore()
+    drawScoreMax()
+  }, 100
+)
+
+function startGame(){ // show gameOver
+  ctx.font = '45px invasion';
+  ctx.fillText('Press any key to start !', 400, 350)
+  startGameRequest = requestAnimationFrame(startGame)
+}
+
+function checkLevel(){
+  if(score<=9){
+    ballSpeed = 4
+    enemySpeed = 5
+    bonusSpeed = 3
+  }
+  else if(score<=14){
+    ballSpeed = 5
+    enemySpeed = 6
+    bonusSpeed = 4
+  }
+  else if(score<=19){
+    ballSpeed = 6
+    enemySpeed = 7
+    bonusSpeed = 6
+  }
+  else if(score<=30){
+    ballSpeed = 15
+    enemySpeed = 5
+    bonusSpeed = 15
+  }
+
+}
