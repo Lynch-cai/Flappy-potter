@@ -52,13 +52,14 @@ function gameOver(){
   drawGameOver()
 }
 
-cvs.addEventListener(
-  'click',
+document.addEventListener(
+  'keydown',
   function(){
     if (isGameOver==1){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       character.posy = 322
       init()
+      startGame()
       temp=1
     }
     else if (isGameOver==0&&temp==1){

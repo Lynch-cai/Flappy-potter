@@ -14,7 +14,7 @@ let numberOfBonus = 6 // default 6
 let bonusSpeed = 7 // default 5
 let spawnBonusInterval = 500
 
-
+let gravityPower = 0.40 // default 0.40
 
 // Character option
 let jumpTime = 7 // default 7

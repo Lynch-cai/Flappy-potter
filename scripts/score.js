@@ -29,7 +29,7 @@ function drawTotalCoins(){
   requestAnimationFrame(drawTotalCoins)
 }
 
-drawTotalCoins()
+
 
 
 
@@ -39,8 +39,6 @@ function drawScore(){
   requestAnimationFrame(drawScore)
 }
 
-drawScore()
-
 function drawScoreMax(){
   saveScoreMax()
   ctx.font = '22px invasion';
@@ -48,4 +46,18 @@ function drawScoreMax(){
   requestAnimationFrame(drawScoreMax)
 }
 
-drawScoreMax()
+
+setTimeout(
+  function(){
+    drawTotalCoins()
+    startGame()
+    drawScore()
+    drawScoreMax()
+  }, 100
+)
+
+function startGame(){ // show gameOver
+  ctx.font = '45px invasion';
+  ctx.fillText('Press any key to start !', 400, 350)
+  startGameRequest = requestAnimationFrame(startGame)
+}

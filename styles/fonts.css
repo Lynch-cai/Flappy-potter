@@ -3,5 +3,5 @@ body{
 }
 @font-face {
  font-family: "invasion";
- src: url("../fonts/invasion2000.ttf") format("truetype");
+ src: url("../fonts/invasion2000.woff") format("truetype");
 }
