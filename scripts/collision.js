@@ -9,6 +9,7 @@ function hurtbox() {
        character.posy <=-75 || character.posy >=795)
     {
       gameOver()
+      playSound()
     }
   }
   for (var i = 0; i < numberOfBalls; i++) {
@@ -37,6 +38,11 @@ function drawGameOver(){ // show gameOver
   ctx.font = '22px invasion';
   ctx.fillText('GameOver !', 530, 300);
   ctx.fillText('Click to restart', 520, 350);
+}
+
+function playSound(){
+  let hitSound = new Audio("sounds/hitSound" + ".wav");
+  hitSound.play();
 }
 
 function gameOver(){
