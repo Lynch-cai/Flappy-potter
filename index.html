@@ -5,24 +5,64 @@
     <meta name="description" content="">
     <link rel="stylesheet" href="styles/main.css">
     <link rel="stylesheet" href="styles/fonts.css">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   </head>
   <header>
     <div class="container title">
-      <h1>Flappy Potter</h1>
+      <h1><a href="index.html">Flappy Potter<a></h1>
     </div>
   </header>
   <body>
-    <div class="background">
-      <img src="images/background_site.png" class="background_site" alt="background">
-
+    <div class="container">
+      <h2 class="press_start">Press Start !</h2>
+      <img src="images/characterImg01.png" class="harry_img" data-aos="fade-right" data-aos-duration="1000"  alt="Harry Potter">
+      <a href="game.html" class="start_button"><span>START</span></a>
+      <div class="book_container">
+        <img src="images/livre.png" class="book"></img>
+        <div class="booktxt1" data-aos="fade-up" data-aos-duration="1000">
+          <p>Vous etes Harry Potter a bord du celebre balais volant Nimbus 2000 et vous jouez au Quidditch a Poudlard.</p>
+          <p>A l’aide de votre barre espace, attrapez les balles magiques, le vif d’or, pour remporter des points.</p>
+        </div>
+        <div class="booktxt2" data-aos="fade-up" data-aos-duration="1000">
+          <p>Drago Malfoy, le professeur Rogue et Voldemort vont essayer de vous faire perdre : vous devrez les eviter. <p>
+          <p>Si vous ne les evitez pas, Serpentard gagnera, et vous perdrez alors la partie.</p>
+        </div>
+      </div>
     </div>
-    <script type="text/javascript" src="scripts/option.js"></script>
-    <script type="text/javascript" src="scripts/character.js"></script>
-    <script type="text/javascript" src="scripts/enemy.js"></script>
-    <script type="text/javascript" src="scripts/ball.js"></script>
-    <script type="text/javascript" src="scripts/collision.js"></script>
-    <script type="text/javascript" src="scripts/score.js"></script>
-    <script type="text/javascript" src="scripts/shop.js"></script>
+    <footer id="footer_container">
+      <div class="social">
+        <img src="images/facebook.svg"></img>
+        <img src="images/twitter.svg"></img>
+        <img src="images/instagram.svg"></img>
+      </div>
+      <div class="play">
+          <ul class="footer_links_play">
+            <li>
+              <a href="">Jouer</a>
+            </li>
+            <li>
+              <a href="">Boutique</a>
+            </li>
+          </ul>
+        </div>
+      <div class="footer_text">
+        <!-- <p> Copyright 2019 E03 HETIC </p> -->
+        <ul class="footer_links">
+          <li>
+            <a href="">Conditions d'utilisation</a>
+          </li>
+          <li>
+            <a href="">Mentions légales</a>
+          </li>
+          <li>
+            <a href="">Contact</a>
+          </li>
+        </ul>
+      </div>
+    </footer>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+      AOS.init();
+    </script>
   </body>
 </html>

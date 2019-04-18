@@ -1,30 +1,162 @@
 body{
   margin: 0;
   padding: 0;
+  background-image: url("../images/background_site.png");
+  background-color: #190819;
+  background-repeat: no-repeat;
   font-family: 'Roboto', 'Arial', sans-serif;
   font-size: 14px;
   color: #444;
 }
 
 .container{
+  width: 100%;
+  margin: 0 auto;
+}
+
+a{
+  text-decoration: none;
+  color: black;
 }
 
 .title{
-  margin: 50px 0px;
+  margin: 30px 0px;
   font-family: 'harryPotter';
-  color: white;
+  font-size: 1.9em;
   text-align: center;
-  position: absolute;
-}
-.container-fluid{
-  padding: 0;
-  margin:0;
-}
-.background_site{
-  width: 100%;
+  color: black;
 }
 
-.positionAbsolute{
+.press_start{
+  font-family: 'pressStart';
+  font-size: 1.9em;
+  color: white;
+  margin: 100px 0px;
+  text-align: center;
+}
+
+.harry_img{
+  margin:auto;
+  width: 100px;
+  display: block;
+}
+
+.start_button{
+  background-color: #e67e22;
+  width: 130px;
+  height: 30px;
+  border-radius: 50px;
+  border: none;
+  color: white;
+	font-family: 'pressStart';
+	font-size: 14px;
+  margin:auto;
+  display: block;
+  margin-top: 70px;
+  border-top: 1px solid #CCCCCC;
+  border-right: 1px solid #333333;
+  border-bottom: 1px solid #333333;
+  border-left: 1px solid #CCCCCC;
+  padding-top:15px;
+}
+
+.start_button:hover{
+  background-color: #f39c12;
+}
+
+.start_button span{
+  text-align: center;
+  margin: 28px;
+}
+
+.book_container{
+  position: relative;
+  text-align: left
+}
+
+.book{
+  display:block;
+  margin: 0 auto;
+  padding-top: 5%;
+  z-index: auto;
+}
+
+.booktxt1{
   position: absolute;
-  width: 1080px;
+  font-family: 'Minecraft';
+  font-size: 14px;
+  color: #4A2525;
+  top: 155px;
+  left: 450px;
+}
+
+.booktxt1 p{
+  text-align: left;
+  width: 21%;
+}
+
+.booktxt2{
+  position: absolute;
+  font-family: 'Minecraft';
+  font-size: 14px;
+  color: #4A2525;
+  bottom: 115px;
+  left: 690px;
+}
+
+.booktxt2 p{
+  text-align: left;
+  width: 25%;
+}
+
+#footer_container{
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: #00050f;
+  color: #fff;
+
+}
+
+.footer_text{
+  text-align: left;
+  margin-bottom: 11px;
+  width: 100%;
+  font-size: 12px;
+}
+
+.footer_links{
+  margin: 5px 0 0;
+  list-style: none;
+  display: flex;
+  justify-content: space-around;
+}
+.footer_links li{
+
+}
+.footer_links li a{
+  text-decoration: none;
+  color: white;
+}
+
+.footer_links_play{
+  list-style: none;
+  text-align: center;
+
+}
+.footer_links_play li a {
+  text-decoration: none;
+  color: white;
+}
+
+.social{
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
+.social img{
+  width: 25px;
+  height: 25px;
+  margin: 5px;
 }
