@@ -60,7 +60,6 @@ setTimeout(
     startGame()
     drawScore()
     drawScoreMax()
-    playHiSound()
   }, 100
 )
 
@@ -96,3 +95,6 @@ function playHiSound(){
   let hiSound = new Audio("sounds/background_music.mp3");
   hiSound.play();
 }
+
+
+  // Show loading animation.
