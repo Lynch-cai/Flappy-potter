@@ -30,10 +30,6 @@ function drawTotalCoins(){
   requestAnimationFrame(drawTotalCoins)
 }
 
-
-
-
-
 function drawScore(){
   ctx.font = '50px invasion';
   ctx.fillText(score, 620, 80);
@@ -47,6 +43,11 @@ function drawScoreMax(){
   requestAnimationFrame(drawScoreMax)
 }
 
+function startGame(){ // show gameOver
+  ctx.font = '45px invasion';
+  ctx.fillText('Press any key to start !', 400, 350)
+  startGameRequest = requestAnimationFrame(startGame)
+}
 
 setTimeout(
   function(){
@@ -54,35 +55,39 @@ setTimeout(
     startGame()
     drawScore()
     drawScoreMax()
+    playHiSound()
   }, 100
 )
 
-function startGame(){ // show gameOver
-  ctx.font = '45px invasion';
-  ctx.fillText('Press any key to start !', 400, 350)
-  startGameRequest = requestAnimationFrame(startGame)
-}
-
 function checkLevel(){
-  if(score<=9){
+  if(score<=1){
     ballSpeed = 4
     enemySpeed = 5
     bonusSpeed = 3
+    backgroundSpeed = parseInt(1)
   }
-  else if(score<=14){
+  else if(score<=2){
     ballSpeed = 5
     enemySpeed = 6
     bonusSpeed = 4
+    backgroundSpeed = parseInt(2)
   }
   else if(score<=19){
     ballSpeed = 6
     enemySpeed = 7
     bonusSpeed = 6
+    backgroundSpeed = 2
   }
   else if(score<=30){
     ballSpeed = 15
     enemySpeed = 5
     bonusSpeed = 15
+    backgroundSpeed = 3
   }
 
+}
+
+function playHiSound(){
+  let hiSound = new Audio("sounds/background_music.mp3");
+  hiSound.play();
 }

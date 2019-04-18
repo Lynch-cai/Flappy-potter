@@ -9,11 +9,6 @@ let numberOfBalls = 6 // default 6
 let ballSpeed = 3// default 5
 let spawnBallInterval = 1000
 
-// Bonus option
-let numberOfBonus = 6 // default 6
-let bonusSpeed = 7 // default 5
-let spawnBonusInterval = 500
-
 let gravityPower = 0.40 // default 0.40
 
 // Character option

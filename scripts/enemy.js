@@ -1,9 +1,15 @@
 let enemyImg01 = new Image()
 enemyImg01.src = "images/enemyImg01.png"
+let enemyImg02 = new Image()
+enemyImg02.src = "images/enemyImg02.png"
+let enemyImg03 = new Image()
+enemyImg03.src = "images/enemyImg03.png"
 let temp3 =0, enemy = new Array()
 
 for (var i = 0; i < numberOfEnemies; i++) { //
   enemy.push(new Element(enemyImg01,10001 ,0,75,75))
+  enemy.push(new Element(enemyImg02,10001 ,0,75,75))
+  enemy.push(new Element(enemyImg03,10001 ,0,75,75))
 }
 
 function generatePosY(y){

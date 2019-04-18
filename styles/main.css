@@ -29,6 +29,10 @@ canvas{
 
 }
 
+embed{
+  display: none;
+}
+
 .game_container{
   width:50px ;
 }

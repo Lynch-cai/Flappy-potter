@@ -9,7 +9,12 @@ function hurtbox() {
        character.posy <=-75 || character.posy >=795)
     {
       gameOver()
-      playSound()
+      clearInterval(moveBackground)
+
+      if (temp6 == 0){
+        temp6 = 1
+        playSound()
+      }
     }
   }
   for (var i = 0; i < numberOfBalls; i++) {
@@ -22,6 +27,7 @@ function hurtbox() {
       saveTotalCoins()
     }
   }
+
   // for (var i = 0; i < numberOfBonus; i++) {
   //   if (character.posx < bonus[i].posx + bonus[i].width &&
   //      character.posx + character.width > bonus[i].posx &&
@@ -35,13 +41,14 @@ function hurtbox() {
 }
 
 function drawGameOver(){ // show gameOver
-  ctx.font = '22px invasion';
-  ctx.fillText('GameOver !', 530, 300);
-  ctx.fillText('Click to restart', 520, 350);
+  ctx.font = '50px invasion';
+  ctx.fillText('Game over', 490, 300);
+    ctx.font = '35px invasion';
+  ctx.fillText('Press any key to restart !', 380, 350);
 }
 
 function playSound(){
-  let hitSound = new Audio("sounds/hitSound" + ".wav");
+  let hitSound = new Audio("sounds/hitSound.wav");
   hitSound.play();
 }
 
@@ -56,17 +63,19 @@ function gameOver(){
   }
   saveScoreMax()
   drawGameOver()
+
 }
 
 document.addEventListener(
-  'keydown',
+  'keypress',
   function(){
     if (isGameOver==1){
       ctx.clearRect(0,0,canvas.width,canvas.height);
       character.posy = 322
       init()
-      startGame()
       temp=1
+      initBackground()
+      startGame()
     }
     else if (isGameOver==0&&temp==1){
       temp=0
@@ -78,10 +87,6 @@ document.addEventListener(
         enemy[i].posx=(1280+((1000/enemyMoveEvery)*enemySpeed*(i+1)*(spawnEnemyInterval/1000))) // regeneration of every enemy posx with the same option
         generatePosY(i)
       }
-      // for (var i = 0; i < numberOfBonus; i++) {
-      //   enemy[i].posx=(1280+((1000/enemyMoveEvery)*bonusSpeed*(i+1)*(spawnEnemyInterval/1000))) // regeneration of every enemy posx with the same option
-      //   generatePosY(i)
-      // }
     }
   }
 )
