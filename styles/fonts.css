@@ -5,3 +5,15 @@ body{
  font-family: "invasion";
  src: url("../fonts/invasion2000.woff") format("truetype");
 }
+@font-face {
+ font-family: "harryPotter";
+ src: url("../fonts/harryPotter.ttf") format("truetype");
+}
+@font-face {
+ font-family: "minecraft";
+ src: url("../fonts/minecraft.ttf") format("truetype");
+}
+@font-face {
+ font-family: "pressStart";
+ src: url("../fonts/pressStart2P.ttf") format("truetype");
+}

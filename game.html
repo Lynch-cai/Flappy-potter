@@ -3,20 +3,24 @@
   <head>
     <meta charset="utf-8">
     <meta name="description" content="">
-    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/game.css">
     <link rel="stylesheet" href="styles/fonts.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   </head>
-  <header>
-    <div class="container title">
-      <h1>Flappy Potter</h1>
-    </div>
-  </header>
   <body>
-    <div class="background">
-      <img src="images/background_site.png" class="background_site" alt="background">
-
+    <embed loop = "true" src="sounds/background_music.mp3" hidden="true"></embed>
+    <div class="game_container">
+      <div class="game_background">
+        <img class="game_background01" src="images/background01.png" alt="">
+        <img class="game_background02" src="images/background02.png" alt="">
+      </div>
+      <canvas id="canvas" width="1280" height="720">
+      </canvas>
     </div>
+    <audio>
+      <source id="pew" src="sounds/hitSound.wav"></source>
+      <source id="sound" src="sounds/background_music.mp3"></source>
+    </audio>
     <script type="text/javascript" src="scripts/option.js"></script>
     <script type="text/javascript" src="scripts/character.js"></script>
     <script type="text/javascript" src="scripts/enemy.js"></script>
