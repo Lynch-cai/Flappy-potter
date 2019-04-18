@@ -92,7 +92,6 @@ function checkLevel(){
 }
 
 function playHiSound(){
-  let hiSound = new Audio("sounds/background_music.mp3");
   let hiSound = new Audio("sounds/background_music.mp3")
   hiSound.play()
 }
