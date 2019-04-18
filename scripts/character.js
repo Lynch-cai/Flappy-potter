@@ -12,7 +12,7 @@ let characterImg04 = new Image()
 characterImg04.src = "images/characterImg04.png"
 let characterImg05 = new Image()
 characterImg05.src = "images/characterImg05.png"
-let choice = characterImg04, timeout, temp2, gravitySpeed, gravityVelocity, isGameOver
+let choice = characterImg01, timeout, temp2, gravitySpeed, gravityVelocity, isGameOver
 let temp6
 let backgroundSpeed = parseInt(1)
 
@@ -58,9 +58,6 @@ function drawCharacter(){
 document.addEventListener( // Jump on click
   'keypress',
   function(){
-    console.log(temp7)
-    console.log(temp8)
-
     if (isGameOver==0&&timeout==0){
       gravitySpeed = 0
       gravityVelocity = 0
@@ -86,18 +83,7 @@ function jump(){
   }
 }
 
-cvs.addEventListener(
-  'click',
-  function(){
-    let canvas = document.getElementById('canvas')
-    if(canvas.webkitRequestFullScreen){
-       canvas.webkitRequestFullScreen();
-    }
-    else {
-      canvas.mozRequestFullScreen();
-    }
-  }
-)
+
 
 function gravity(){ // Gravity & Velocity
   if (gravitySpeed>-1) {
@@ -137,6 +123,11 @@ function init(){
   temp8=0
   temp7=1280
   backgroundSpeed = parseInt(1)
+  let temp = localStorage.getItem('boughtItem')
+  boughtItem = JSON.parse(temp)
+  if (boughtItem==null){
+    boughtItem=new Array(1,0,0,0,0)
+  }
 }
 
 init()

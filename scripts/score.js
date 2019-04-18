@@ -38,6 +38,11 @@ function drawScore(){
 
 function drawScoreMax(){
   saveScoreMax()
+  if (scoreMax>0){
+  }
+  else {
+    scoreMax = 0
+  }
   ctx.font = '22px invasion';
   ctx.fillText('Highest score : ' + scoreMax, 530, 120);
   requestAnimationFrame(drawScoreMax)
@@ -60,31 +65,31 @@ setTimeout(
 )
 
 function checkLevel(){
-  if(score<=1){
+  if(score<=5){
     ballSpeed = 4
     enemySpeed = 5
-    bonusSpeed = 3
     backgroundSpeed = parseInt(1)
   }
-  else if(score<=2){
+  else if(score<=9){
     ballSpeed = 5
     enemySpeed = 6
-    bonusSpeed = 4
     backgroundSpeed = parseInt(2)
   }
-  else if(score<=19){
+  else if(score<=14){
     ballSpeed = 6
     enemySpeed = 7
-    bonusSpeed = 6
-    backgroundSpeed = 2
+    backgroundSpeed = parseInt(3)
   }
-  else if(score<=30){
+  else if(score<=19){
     ballSpeed = 15
     enemySpeed = 5
-    bonusSpeed = 15
-    backgroundSpeed = 3
+    backgroundSpeed = parseInt(4)
   }
-
+  else if(score<=24){
+    ballSpeed = 7
+    enemySpeed = 8
+    backgroundSpeed = parseInt(5)
+  }
 }
 
 function playHiSound(){
