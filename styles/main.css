@@ -109,13 +109,47 @@ a{
   width: 25%;
 }
 
+.uber_eats{
+  text-align: center;
+}
+.uber_eats p{
+  margin-top: 90px;
+  font-family:'rockwell',serif;
+  font-size:1.5em;
+  font-style:bold;
+  color: white;
+}
+
+.uber_eats .button{
+background-color: #000000;
+border: none;
+font-size: 55px;
+color: #FFFFFF;
+padding: 30px;
+width : 300px;
+text-align: center;
+text-decoration: none;
+overflow: hidden;
+font-family:'Minecraft',serif;
+font-size:55px;
+font-style:bold;
+color:#FFFFFF;
+border-radius: 12px;
+margin-top: 20px;
+margin-bottom: 80px;
+}
+
+.uber_eats span{
+color: #2E8B57
+}
+
 #footer_container{
   display: flex;
   align-items: center;
   padding: 5px;
   background-color: #00050f;
   color: #fff;
-
+  height:150px;
 }
 
 .footer_text{

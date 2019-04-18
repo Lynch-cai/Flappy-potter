@@ -17,3 +17,7 @@ body{
  font-family: "pressStart";
  src: url("../fonts/pressStart2P.ttf") format("truetype");
 }
+@font-face {
+ font-family: "rockwell";
+ src: url("../fonts/rockwell.ttf") format("truetype");
+}
